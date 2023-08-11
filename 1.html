@@ -1,0 +1,186 @@
+<html>
+
+
+<script>
+    function publishToTable() {
+        const name = document.getElementById('name').value;
+        const mobile = document.getElementById('mobile').value;
+        const email = document.getElementById('email').value;
+        const state = document.getElementById('state').value;
+        const location = document.getElementById('location').value;
+        // const Action = document.getElementById('Action').value;
+        const error = document.getElementById('error');
+        error.innerHTML = (!name || !email) ? 'Name & Email both values are required.' : '';
+        if (name && email) {
+            const tableElement = document.getElementById('table');
+            const trElement = document.createElement('tr');
+            const tbodyElement = document.createElement('tbody');
+            const nameEle = document.createElement('td');
+            const mobileEle = document.createElement('td');
+            const emailEle = document.createElement('td');
+            const stateEle = document.createElement('td');
+            const locationEle = document.createElement('td');
+            // const ActionEle = document.createElement('td');
+            const actionCell = document.createElement('td');
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', function() {
+            editRow(trElement);
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            tableElement.deleteRow(trElement.rowIndex);
+        });
+
+            nameEle.innerHTML = name;
+            mobileEle.innerHTML = mobile;
+            emailEle.innerHTML = email;
+            stateEle.innerHTML = state;
+            locationEle.innerHTML = location;
+            // Action.innerHTML = '<button onclick="editRow(this)">Edit</button>';
+            actionCell.appendChild(editButton);
+        actionCell.appendChild(deleteButton);
+
+            trElement.appendChild(nameEle);
+            trElement.appendChild(mobileEle);
+            trElement.appendChild(emailEle);
+            trElement.appendChild(stateEle);
+            trElement.appendChild(locationEle);
+            trElement.appendChild(actionCell);
+            tbodyElement.appendChild(trElement);
+            tableElement.appendChild(tbodyElement);
+
+
+
+        }
+
+    }
+    function editRow(row) {
+    const name = row.cells[0].textContent;
+    const mobile = row.cells[1].textContent;
+    const email = row.cells[2].textContent;
+    const state = row.cells[3].textContent;
+    const location = row.cells[4].textContent;
+
+    document.getElementById('name').value = name;
+    document.getElementById('mobile').value = mobile;
+    document.getElementById('email').value = email;
+    document.getElementById('state').value = state;
+    document.getElementById('location').value = location;
+
+    row.parentNode.removeChild(row);
+}
+
+</script>
+
+<body>
+
+    <style>
+        body {
+            background-image: url(gettyimages-1366148744-612x612.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
+
+        }
+
+        .logo {
+            display: flex;
+            justify-content: space-between;
+            background-color: antiquewhite;
+        }
+
+        .head {
+            font-size: 30px;
+            margin: 15px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            margin: 40px;
+        }
+
+        .navbar a {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        form {
+            background-color: beige;
+        }
+
+
+
+        .complete {
+            width: 86%;
+
+        }
+
+        .form {
+            width: 100%;
+            margin: 40px;
+
+        }
+
+        table th {
+            border: 2px solid black;
+            height: 50px;
+
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+
+    <header>
+        <div class="logo">
+            <div class="head">
+                <h3>Secure Learning</h3>
+            </div>
+
+            <div class="navbar">
+                <a href="#">Home</a>
+                <a href="#">Contact</a>
+                <a href="#">About</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="complete">
+        <div class="form">
+            <label>Name: <input id="name" type="text"></label>
+            <label>Mobile: <input id="mobile" type="text"></label>
+            <label>Email: <input id="email" type="text"></label>
+            <label>State: <input id="state" type="text"></label>
+            <label>Location: <input id="location" type="text"></label>
+            <span id="error"></span>
+            <button onclick="publishToTable()">Submit</button>
+        </div>
+        <div id="tables">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>State</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
